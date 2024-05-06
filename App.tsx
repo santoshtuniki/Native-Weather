@@ -10,40 +10,29 @@ import {
     SafeAreaView,
     ScrollView,
     StatusBar,
+    StyleSheet,
     Text,
     useColorScheme,
     View,
 } from 'react-native';
 
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { backgroundStyle, textStyle, viewStyle } from './src/utils';
 
 const App = () => {
     const isDarkMode = useColorScheme() === 'dark';
 
-    const backgroundStyle = {
-        backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-    };
-
     return (
-        <SafeAreaView style={backgroundStyle}>
+        <SafeAreaView style={backgroundStyle(isDarkMode)}>
             <StatusBar
                 barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-                backgroundColor={backgroundStyle.backgroundColor}
+                backgroundColor={backgroundStyle(isDarkMode).backgroundColor}
             />
             <ScrollView
                 contentInsetAdjustmentBehavior="automatic"
-                style={backgroundStyle}>
-                <View
-                    style={{
-                        backgroundColor: isDarkMode ? Colors.black : Colors.white,
-                    }}>
-                    <Text
-                        style={{
-                            color: isDarkMode ? Colors.light : Colors.dark,
-                            fontSize: 18,
-                            paddingVertical: 5,
-                        }}
-                    >
+                style={backgroundStyle(isDarkMode)}
+            >
+                <View style={viewStyle(isDarkMode)}>
+                    <Text style={[styles.text, textStyle(isDarkMode)]}>
                         Hello World
                     </Text>
                 </View>
@@ -53,3 +42,10 @@ const App = () => {
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+    text: {
+        fontSize: 18,
+        paddingVertical: 5,
+    },
+});
