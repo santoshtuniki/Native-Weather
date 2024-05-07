@@ -15,3 +15,11 @@
     npm run android
 
     npm start
+
+------
+
+#### To make font management smoother on Android, use this method:
+
+Edit android/app/build.gradle (NOT android/build.gradle) and add:
+
+    apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")

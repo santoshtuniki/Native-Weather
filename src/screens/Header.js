@@ -1,11 +1,14 @@
 // module imports
-import { StyleSheet, useColorScheme } from 'react-native';
+import {
+    StyleSheet,
+    useColorScheme,
+} from 'react-native';
 import { Appbar } from 'react-native-paper';
 
 // util imports
 import { COLORS } from '../utils';
 
-export const Header = ({name}) => {
+export const Header = ({ name }) => {
     const isDarkMode = useColorScheme() === 'dark';
 
     return (
