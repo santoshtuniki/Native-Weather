@@ -23,3 +23,5 @@
 Edit android/app/build.gradle (NOT android/build.gradle) and add:
 
     apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
+
+------

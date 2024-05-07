@@ -20,6 +20,7 @@ export const Header = ({ name }) => {
             />
         </Appbar.Header>
     );
+
 };
 
 const styles = StyleSheet.create({

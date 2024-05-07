@@ -2,16 +2,14 @@
 import React from 'react';
 import {
     SafeAreaView,
-    ScrollView,
     StatusBar,
     StyleSheet,
     useColorScheme,
-    View,
 } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // util imports
-import { backgroundStyle, COLORS, viewStyle } from './src/utils';
+import { backgroundStyle, COLORS } from './src/utils';
 
 // component imports
 import { Search } from './src/screens';
@@ -26,17 +24,13 @@ const App = () => {
                     barStyle={isDarkMode ? 'light-content' : 'dark-content'}
                     backgroundColor={COLORS.PRIMARY}
                 />
-                <ScrollView
-                    contentInsetAdjustmentBehavior="automatic"
-                    style={backgroundStyle(isDarkMode)}
-                >
-                    <View style={viewStyle(isDarkMode)}>
-                        <Search />
-                    </View>
-                </ScrollView>
+                {/* <View style={viewStyle(isDarkMode)}> */}
+                <Search />
+                {/* </View> */}
             </SafeAreaProvider>
         </SafeAreaView>
     );
+
 };
 
 export default App;
