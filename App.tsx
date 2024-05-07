@@ -1,42 +1,40 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
+// module imports
 import React from 'react';
 import {
     SafeAreaView,
     ScrollView,
     StatusBar,
     StyleSheet,
-    Text,
     useColorScheme,
     View,
 } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { backgroundStyle, textStyle, viewStyle } from './src/utils';
+// util imports
+import { backgroundStyle, COLORS, viewStyle } from './src/utils';
+
+// component imports
+import { Search } from './src/screens';
 
 const App = () => {
     const isDarkMode = useColorScheme() === 'dark';
 
     return (
-        <SafeAreaView style={backgroundStyle(isDarkMode)}>
-            <StatusBar
-                barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-                backgroundColor={backgroundStyle(isDarkMode).backgroundColor}
-            />
-            <ScrollView
-                contentInsetAdjustmentBehavior="automatic"
-                style={backgroundStyle(isDarkMode)}
-            >
-                <View style={viewStyle(isDarkMode)}>
-                    <Text style={[styles.text, textStyle(isDarkMode)]}>
-                        Hello World
-                    </Text>
-                </View>
-            </ScrollView>
+        <SafeAreaView style={[styles.container, backgroundStyle(isDarkMode)]}>
+            <SafeAreaProvider>
+                <StatusBar
+                    barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+                    backgroundColor={COLORS.primary}
+                />
+                <ScrollView
+                    contentInsetAdjustmentBehavior="automatic"
+                    style={backgroundStyle(isDarkMode)}
+                >
+                    <View style={viewStyle(isDarkMode)}>
+                        <Search />
+                    </View>
+                </ScrollView>
+            </SafeAreaProvider>
         </SafeAreaView>
     );
 };
@@ -44,6 +42,9 @@ const App = () => {
 export default App;
 
 const styles = StyleSheet.create({
+    container: {
+        height: '100%',
+    },
     text: {
         fontSize: 18,
         paddingVertical: 5,

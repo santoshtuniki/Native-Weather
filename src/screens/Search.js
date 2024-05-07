@@ -1,19 +1,23 @@
-import { StyleSheet } from 'react-native';
-import { Appbar, Title } from 'react-native-paper';
+// module imports
+import { StyleSheet, Text, View, useColorScheme } from 'react-native';
+
+// component im ports
+import { Header } from './Header';
+import { textStyle } from '../utils';
 
 export const Search = () => {
+    const isDarkMode = useColorScheme() === 'dark';
 
     return (
-        <Appbar.Header style={styles.header}>
-            <Title>
-                Weather App
-            </Title>
-        </Appbar.Header>
+        <View style={styles.container}>
+            <Header/>
+            <Text style={textStyle(isDarkMode)}>Search Screen</Text>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
-    header: {
-
+    container: {
+        flex: 1,
     },
 });
