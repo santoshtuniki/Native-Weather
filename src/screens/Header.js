@@ -5,15 +5,15 @@ import { Appbar } from 'react-native-paper';
 // util imports
 import { COLORS } from '../utils';
 
-export const Header = () => {
+export const Header = ({name}) => {
     const isDarkMode = useColorScheme() === 'dark';
 
     return (
         <Appbar.Header style={styles.header}>
             <Appbar.Content
-                title="Weather App"
+                title={name}
                 titleStyle={styles.title}
-                color={isDarkMode ? COLORS.white : COLORS.black}
+                color={isDarkMode ? COLORS.WHITE : COLORS.BLACK}
             />
         </Appbar.Header>
     );
@@ -21,7 +21,7 @@ export const Header = () => {
 
 const styles = StyleSheet.create({
     header: {
-        backgroundColor: COLORS.primary,
+        backgroundColor: COLORS.PRIMARY,
     },
     title: {
         fontSize: 20,

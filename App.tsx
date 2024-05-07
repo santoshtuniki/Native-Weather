@@ -24,7 +24,7 @@ const App = () => {
             <SafeAreaProvider>
                 <StatusBar
                     barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-                    backgroundColor={COLORS.primary}
+                    backgroundColor={COLORS.PRIMARY}
                 />
                 <ScrollView
                     contentInsetAdjustmentBehavior="automatic"

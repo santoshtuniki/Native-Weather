@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 export enum COLORS {
-    primary = '#00aaff',
-    black = '#000000',
-    white = '#ffffff',
+    BLACK = '#000000',
+    WHITE = '#ffffff',
+    PRIMARY = '#00aaff',
 }
