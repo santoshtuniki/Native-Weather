@@ -9,7 +9,7 @@ import {
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // util imports
-import { backgroundStyle, COLORS } from './src/utils';
+import { COLORS } from './src/utils';
 
 // component imports
 import { Search } from './src/screens';
@@ -18,15 +18,13 @@ const App = () => {
     const isDarkMode = useColorScheme() === 'dark';
 
     return (
-        <SafeAreaView style={[styles.container, backgroundStyle(isDarkMode)]}>
+        <SafeAreaView style={styles.container}>
             <SafeAreaProvider>
                 <StatusBar
                     barStyle={isDarkMode ? 'light-content' : 'dark-content'}
                     backgroundColor={COLORS.PRIMARY}
                 />
-                {/* <View style={viewStyle(isDarkMode)}> */}
                 <Search />
-                {/* </View> */}
             </SafeAreaProvider>
         </SafeAreaView>
     );
