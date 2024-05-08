@@ -11,10 +11,12 @@ import {
 import { TextInput } from 'react-native-paper';
 
 // util imports
-import { COLORS, CONSTANTS, textStyle, themeStyle, viewStyle } from '../utils';
+import {
+    COLORS, ICONS, MESSAGE, CONSTANTS, textStyle, viewStyle, themeStyle,
+} from '../utils';
 import { SECRET } from '../secrets';
 
-// component im ports
+// component imports
 import { ButtonComp, Header } from '../components';
 import { weatherImage } from './getImage';
 
@@ -33,7 +35,6 @@ export const Search = () => {
             if (dataResponse?.cod === 200) {
                 setData(dataResponse);
                 setError('');
-                setCity('');
             } else {
                 setError(dataResponse?.message ?? '');
                 setData(null);
@@ -45,50 +46,73 @@ export const Search = () => {
         Keyboard.dismiss();
     };
 
+    const clearInput = () => {
+        setData(null);
+        setError('');
+        setCity('');
+    };
+
     return (
         <View style={[{ height: '100%' }, viewStyle(isDarkMode)]}>
             <Header name={CONSTANTS.TITLE} />
             <TextInput
-                label={'City Name'}
+                label={CONSTANTS.LABEL}
                 theme={themeStyle()}
                 value={city}
                 onChangeText={(text) => setCity(text)}
             />
             {
                 error?.length > 0 &&
-                <Text style={styles.error}>{error}</Text>
+                <>
+                    <ButtonComp
+                        icon={ICONS.CLEAR}
+                        message={MESSAGE.CLEAR}
+                        callback={clearInput}
+                    />
+                    <Text style={styles.error}>{error}</Text>
+                </>
             }
             {
-                error?.length === 0 &&
-                <ButtonComp fetchCity={fetchCity} />
+                (city?.length > 0 && error?.length === 0 && !data) &&
+                <ButtonComp
+                    icon={ICONS.SAVE}
+                    message={MESSAGE.ENTER}
+                    callback={fetchCity}
+                />
             }
             {
                 data &&
-                <View>
-                    <Text style={[styles.name, textStyle(isDarkMode)]}>{data?.name}</Text>
-                    <Image
-                        source={weatherImage(data?.weather[0].main)}
-                        // source={require('../images/clear.png')}
-                        style={styles.image}
+                <>
+                    <ButtonComp
+                        icon={ICONS.CLEAR}
+                        message={MESSAGE.CLEAR}
+                        callback={clearInput}
                     />
-                    <Text style={[styles.description, textStyle(isDarkMode)]}>{data?.weather[0]?.description}</Text>
-                    <View style={styles.row}>
-                        <Text style={[styles.header, textStyle(isDarkMode)]}>Weather</Text>
-                        <Text style={[styles.body, textStyle(isDarkMode)]}>{data?.weather[0].main}</Text>
+                    <View>
+                        <Text style={[styles.name, textStyle(isDarkMode)]}>{data?.name}</Text>
+                        <Image
+                            source={weatherImage(data?.weather[0].main)}
+                            style={styles.image}
+                        />
+                        <Text style={[styles.description, textStyle(isDarkMode)]}>{data?.weather[0]?.description}</Text>
+                        <View style={styles.row}>
+                            <Text style={[styles.header, textStyle(isDarkMode)]}>Weather</Text>
+                            <Text style={[styles.body, textStyle(isDarkMode)]}>{data?.weather[0].main}</Text>
+                        </View>
+                        <View style={styles.row}>
+                            <Text style={[styles.header, textStyle(isDarkMode)]}>Temp</Text>
+                            <Text style={[styles.body, textStyle(isDarkMode)]}>{Math.round(data?.main?.temp)} &deg;C</Text>
+                        </View>
+                        <View style={styles.row}>
+                            <Text style={[styles.header, textStyle(isDarkMode)]}>Humidity</Text>
+                            <Text style={[styles.body, textStyle(isDarkMode)]}>{data?.main?.humidity}%</Text>
+                        </View>
+                        <View style={styles.row}>
+                            <Text style={[styles.header, textStyle(isDarkMode)]}>Wind</Text>
+                            <Text style={[styles.body, textStyle(isDarkMode)]}>{data?.wind.speed} km/h</Text>
+                        </View>
                     </View>
-                    <View style={styles.row}>
-                        <Text style={[styles.header, textStyle(isDarkMode)]}>Temp</Text>
-                        <Text style={[styles.body, textStyle(isDarkMode)]}>{Math.round(data?.main?.temp)} &deg;C</Text>
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={[styles.header, textStyle(isDarkMode)]}>Humidity</Text>
-                        <Text style={[styles.body, textStyle(isDarkMode)]}>{data?.main?.humidity}%</Text>
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={[styles.header, textStyle(isDarkMode)]}>Wind</Text>
-                        <Text style={[styles.body, textStyle(isDarkMode)]}>{data?.wind.speed} km/h</Text>
-                    </View>
-                </View>
+                </>
             }
         </View>
     );
@@ -105,7 +129,6 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         textAlign: 'center',
         color: COLORS.RED,
-        marginVertical: 10,
     },
     image: {
         margin: 10,

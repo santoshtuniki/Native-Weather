@@ -1,5 +1,5 @@
 export { COLORS } from './colors';
-export { CONSTANTS } from './constants';
+export { CONSTANTS, ICONS, MESSAGE } from './constants';
 export {
     backgroundStyle,
     textStyle,

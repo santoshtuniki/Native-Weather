@@ -10,7 +10,7 @@ export const textStyle = (isDarkMode: boolean) => ({
 });
 
 export const viewStyle = (isDarkMode: boolean) => ({
-    backgroundColor: isDarkMode ? Colors.black : Colors.white,
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
 });
 
 export const themeStyle = () => ({

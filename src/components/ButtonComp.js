@@ -7,19 +7,19 @@ import { Button } from 'react-native-paper';
 // util imports
 import { themeStyle } from '../utils';
 
-export const ButtonComp = ({ fetchCity }) => {
+export const ButtonComp = ({ message, icon, callback }) => {
     const isDarkMode = useColorScheme() === 'dark';
 
     return (
         <Button
-            icon="content-save"
+            icon={icon}
             mode="contained"
             theme={themeStyle()}
             dark={isDarkMode}
             style={{ margin: 20 }}
-            onPress={() => fetchCity()}
+            onPress={() => callback()}
         >
-            ENTER
+            {message}
         </Button>
     );
 

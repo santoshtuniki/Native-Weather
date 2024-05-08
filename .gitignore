@@ -2,6 +2,8 @@
 #
 .DS_Store
 src/secrets.ts
+android/app/src/main/assets
+android/app/src/main/res/drawable-mdpi
 
 # Xcode
 #
